@@ -1,6 +1,12 @@
 {
   "services": [
     {
+      "name": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "domain": "chatgpt.com",
+      "note": "문서·메일·보고서 초안 작성\nPDF·엑셀·이미지 분석\n자료 조사·출처 포함 보고서 작성\n데이터 정리·계산·차트 생성\n이미지 제작·수정"
+    },
+    {
       "name": "Genspark",
       "url": "https://www.genspark.ai/",
       "domain": "genspark.ai",
