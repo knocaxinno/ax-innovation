@@ -23,6 +23,7 @@
       "name": "Gemini",
       "url": "https://gemini.google.com/",
       "domain": "gemini.google.com",
+      "icon": "./asset/gemini-icon.svg",
       "note": "웹·Drive 자료 조사 및 보고서 작성\nGmail 메일 초안·요약\n문서·PDF·이미지 분석\n이미지·영상·음악 제작\n웹페이지·업무 도구 제작"
     },
     {
