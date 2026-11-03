@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Field</title>
+  <title>KNOC AX 혁신처</title>
   <meta name="color-scheme" content="light dark" />
 
-  <!-- AI Field 심볼: 브라우저 탭/바로가기 아이콘 -->
+  <!-- KNOC 심볼: 브라우저 탭/바로가기 아이콘 -->
   <link rel="icon" type="image/png" href="./asset/knoc-favicon-transparent.png" />
   <link rel="shortcut icon" type="image/png" href="./asset/knoc-favicon-transparent.png" />
   <link rel="apple-touch-icon" href="./asset/knoc-favicon-transparent.png" />
@@ -117,8 +117,14 @@
       object-fit: contain;
       flex: 0 0 auto;
     }
-    .brand-product-art{position:relative;width:100px;height:48px;overflow:hidden;flex:0 0 auto;}
-    .brand-product-image{position:absolute;top:0;right:0;width:auto;height:48px;max-width:none;display:block;}
+    .brand-product-name{
+      color:var(--text);
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.04em;
+      line-height:1;
+      white-space:nowrap;
+    }
 
     .sub{
       color: var(--muted);
@@ -738,20 +744,16 @@
         <div class="brandline">
           <a class="brand-home" href="./index.html" aria-label="Home">
             <img class="brandlogo" src="./asset/knoc-logo-header-v2.png" alt="KNOC">
-            <span class="brand-product-art" aria-hidden="true"><img class="brand-product-image" src="./asset/ai-field-lockup-v2.png" alt=""></span>
+            <span class="brand-product-name">AX 혁신처</span>
           </a>
         </div>
         <div class="sub">
-          <span class="sub-line">AI Field는 AI정책팀에서 운영합니다.</span>
           <span class="sub-line">신규 AI 서비스 도입, 크레딧 충전 및 이용 도움은 AI정책팀 <span class="contact-phone" aria-label="전화 2526">☎ 2526</span>으로 문의해 주시기 바랍니다.</span>
         </div>
       </div>
 
       <div class="top-actions">
-        <a class="btn nav-help" href="./help.html">도움말</a>
         <a class="btn primary" href="https://www.google.com/" target="_blank" rel="noopener">Google</a>
-        <a class="btn nav-guide" href="./guidebooks.html">서비스 가이드북</a>
-        <a class="btn nav-prompts" href="./prompts.html">프롬프트 예시</a>
         <a class="btn nav-admin" href="./admin.html" target="_blank" rel="noopener">관리자</a>
       </div>
     </header>
@@ -796,40 +798,24 @@
           </div>
         </section>
 
-        <section class="panel" aria-labelledby="newsTitle">
-          <div class="panel-hd">
-            <div>
-              <h2 class="panel-title" id="newsTitle">AI Update News</h2>
-              <div class="panel-meta">최신 업데이트를 날짜순으로 제공합니다.</div>
-            </div>
-          </div>
-          <div class="panel-bd">
-            <ul class="news-list" id="newsList"></ul>
-            <div class="news-pager">
-              <button class="btn mini" id="newsPrev">&lt;&lt;</button>
-              <div class="news-page-list" id="newsPages"></div>
-              <button class="btn mini" id="newsNext">&gt;&gt;</button>
-            </div>
-          </div>
-        </section>
       </div>
     </main>
 
-    <div class="news-modal-backdrop" id="newsModalBackdrop" aria-hidden="true"></div>
-    <section class="news-modal" id="newsModal" aria-hidden="true" aria-label="AI Update News 상세">
-      <div class="news-modal-hd">
-        <div>
-          <h3 class="news-modal-title" id="newsModalTitle">AI Update News</h3>
-          <div class="news-modal-sub">팀 공유용 업데이트 브리핑</div>
-        </div>
-        <button class="btn mini" id="newsModalClose" type="button">닫기</button>
-      </div>
-      <iframe class="news-modal-frame" id="newsModalFrame" title="AI Update News 상세" loading="lazy"></iframe>
-      <div class="news-modal-nav">
-        <button class="news-nav-btn" id="newsModalPrev" type="button" aria-label="이전 뉴스">← 이전 뉴스</button>
-        <button class="news-nav-btn" id="newsModalNext" type="button" aria-label="다음 뉴스">다음 뉴스 →</button>
-      </div>
-    </section>
+    <!-- 기존 스크립트와의 호환을 위한 비표시 요소입니다. 뉴스 기능은 제공하지 않습니다. -->
+    <div hidden aria-hidden="true">
+      <ul id="newsList"></ul>
+      <button id="newsPrev" type="button"></button>
+      <div id="newsPages"></div>
+      <button id="newsNext" type="button"></button>
+      <div id="newsModalBackdrop"></div>
+      <section id="newsModal">
+        <h3 id="newsModalTitle"></h3>
+        <button id="newsModalClose" type="button"></button>
+        <iframe id="newsModalFrame" title=""></iframe>
+        <button id="newsModalPrev" type="button"></button>
+        <button id="newsModalNext" type="button"></button>
+      </section>
+    </div>
 
     <div class="foot">
       <div>마지막 렌더링: <span class="mono" id="renderAt">-</span></div>
@@ -1093,6 +1079,14 @@
       const start = (noticePage - 1) * NOTICE_PAGE_SIZE;
       const pageItems = items.slice(start, start + NOTICE_PAGE_SIZE);
 
+      if(!items.length){
+        const empty = document.createElement("li");
+        empty.className = "notice-item";
+        empty.textContent = "등록된 공지사항이 없습니다.";
+        empty.style.color = "var(--muted)";
+        noticeList.appendChild(empty);
+      }
+
       for(const it of pageItems){
         const li = document.createElement("li");
         li.className = "notice-item";
@@ -1142,6 +1136,10 @@
       }
       noticePrev.disabled = noticePageGroupStart <= 1;
       noticeNext.disabled = noticePageGroupStart >= maxGroupStart;
+      const pager = noticePages.closest(".news-pager");
+      if(pager) pager.hidden = items.length === 0;
+      const hideWrap = hideToday.closest(".notice-hide");
+      if(hideWrap) hideWrap.hidden = items.length === 0;
 
       const body = $("#noticeBody");
       body.style.opacity = "1";

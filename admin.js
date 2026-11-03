@@ -1,6 +1,6 @@
 // ===== 고정 설정 =====
-const OWNER = "KNOC-AIFieldZone";
-const REPO = "Notice-page";
+const OWNER = "knocaxinno";
+const REPO = "ax-innovation";
 const BRANCH = "main";
 const FILE_PATH = "content.json";
 const NEWS_DIR = "News";
@@ -927,13 +927,8 @@ function stripInternalFields(dataWithUids) {
       })),
     },
     noticeKeywordCatalog: ensureNoticeKeywordCatalog(dataWithUids.noticeKeywordCatalog, dataWithUids.notice?.items || []),
-    news: (dataWithUids.news || []).map((it) => ({
-      service: it.service || "",
-      title: it.title || "",
-      date: it.date || "",
-      file: normalizeNewsFileName(it.file, it.date, it.title, true),
-    })),
-    newsServiceCatalog: ensureNewsServiceCatalog(dataWithUids.newsServiceCatalog, dataWithUids.news || []),
+    news: [],
+    newsServiceCatalog: [],
   };
 }
 

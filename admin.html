@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Field</title>
+  <title>KNOC AX 혁신처 관리자</title>
   <link rel="icon" href="./asset/knoc-favicon-transparent.png" type="image/png" />
   <link rel="shortcut icon" href="./asset/knoc-favicon-transparent.png" type="image/png" />
   <link rel="apple-touch-icon" href="./asset/knoc-favicon-transparent.png" />
@@ -77,8 +77,7 @@
     .brandline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
     .brand-home{display:inline-flex;align-items:center;gap:12px;flex:0 0 auto;text-decoration:none;}
     .brandlogo{width:auto;height:48px;max-width:72vw;display:block;object-fit:contain;}
-    .brand-product-art{position:relative;width:100px;height:48px;overflow:hidden;flex:0 0 auto;}
-    .brand-product-image{position:absolute;top:0;right:0;width:auto;height:48px;max-width:none;display:block;}
+    .brand-product-name{color:var(--text);font-size:30px;font-weight:900;letter-spacing:-.04em;line-height:1;white-space:nowrap;}
     h1{margin:0;font-size:20px;font-weight:900;letter-spacing:-0.02em;}
     .sub{color:var(--muted);font-size:13px;margin-top:6px;line-height:1.45;}
 
@@ -524,7 +523,7 @@
         <div class="brandline">
           <a class="brand-home" href="./index.html" aria-label="Home">
             <img class="brandlogo" src="./asset/knoc-logo-header-v2.png" alt="KNOC">
-            <span class="brand-product-art" aria-hidden="true"><img class="brand-product-image" src="./asset/ai-field-lockup-v2.png" alt=""></span>
+            <span class="brand-product-name">AX 혁신처</span>
           </a>
           <h1>관리자</h1>
         </div>
@@ -604,6 +603,7 @@
         </div>
         <button class="btn success" id="btnAddNotice" style="margin-top:10px;">+ 공지 추가</button>
 
+        <div hidden aria-hidden="true">
         <div class="divider"></div>
 
         <h3 style="margin:0 0 6px;font-size:14px;">AI Update News</h3>
@@ -625,6 +625,7 @@
           <button type="button" class="btn" id="newsNext">&gt;&gt;</button>
         </div>
         <button class="btn success" id="btnAddNews" style="margin-top:10px;">+ 뉴스 추가</button>
+        </div>
 
         <div class="divider"></div>
 
@@ -663,8 +664,8 @@
             </div>
           </div>
 
-          <!-- 뉴스 -->
-          <div class="pending-card">
+          <!-- 뉴스 기능은 사용하지 않음 -->
+          <div class="pending-card" hidden aria-hidden="true">
             <div class="pending-top">
               <div class="pending-title">
                 <span class="badge">뉴스</span>
@@ -694,8 +695,8 @@
     </section>
   </div>
 
-  <div id="newsSvcModalBackdrop" class="news-svc-modal-backdrop" aria-hidden="true"></div>
-  <section id="newsSvcModal" class="news-svc-modal" aria-hidden="true">
+  <div id="newsSvcModalBackdrop" class="news-svc-modal-backdrop" aria-hidden="true" hidden></div>
+  <section id="newsSvcModal" class="news-svc-modal" aria-hidden="true" hidden>
     <div class="card-hd" style="margin-bottom:8px;">
       <div class="card-title">뉴스 서비스/색상 관리</div>
       <button class="btn" id="btnCloseNewsSvcModal" type="button">닫기</button>
@@ -708,8 +709,8 @@
     </div>
   </section>
 
-  <div id="newsAddModalBackdrop" class="news-add-modal-backdrop" aria-hidden="true"></div>
-  <section id="newsAddModal" class="news-add-modal tall" aria-hidden="true">
+  <div id="newsAddModalBackdrop" class="news-add-modal-backdrop" aria-hidden="true" hidden></div>
+  <section id="newsAddModal" class="news-add-modal tall" aria-hidden="true" hidden>
     <div class="card-hd" style="margin-bottom:8px;">
       <div class="card-title">뉴스 추가</div>
       <button class="btn" id="btnCloseNewsAddModal" type="button">닫기</button>
@@ -778,8 +779,8 @@
     </div>
   </section>
 
-  <div id="newsSvcAddModalBackdrop" class="news-add-modal-backdrop" aria-hidden="true"></div>
-  <section id="newsSvcAddModal" class="news-add-modal" aria-hidden="true">
+  <div id="newsSvcAddModalBackdrop" class="news-add-modal-backdrop" aria-hidden="true" hidden></div>
+  <section id="newsSvcAddModal" class="news-add-modal" aria-hidden="true" hidden>
     <div class="card-hd" style="margin-bottom:8px;"><div class="card-title">서비스/색상 추가</div><button class="btn" id="btnCloseNewsSvcAddModal" type="button">닫기</button></div>
     <div class="grid2"><div><label>서비스명</label><input id="newsSvcAddName" type="text" /></div><div><label>색상 코드</label><input id="newsSvcAddColor" type="text" value="#94a3b8" /></div></div>
     <div class="grid2"><div><label>색상 선택</label><input id="newsSvcAddColorPicker" type="color" value="#94a3b8" /></div><div><label>미리보기</label><span id="newsSvcAddPreview" class="news-svc-badge" style="display:inline-flex;">미리보기</span></div></div>
