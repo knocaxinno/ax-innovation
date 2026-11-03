@@ -837,9 +837,11 @@ function renderAll() {
 // ===== 폼 스냅샷 =====
 function snapshotFromFormWithUids() {
   const services = [];
+  const loadedServicesByUid = new Map((loadedData?.services || []).map((service) => [String(service._uid), service]));
   const svcCards = requireEl("svcList").querySelectorAll(".card");
   svcCards.forEach((card) => {
     const uid = card.dataset.uid || makeUid();
+    const previous = loadedServicesByUid.get(String(uid)) || {};
     const get = (k) => card.querySelector(`[data-k="${k}"]`);
     services.push({
       _uid: uid,
@@ -848,6 +850,8 @@ function snapshotFromFormWithUids() {
       domain: get("domain")?.value?.trim() || "",
       note: get("note")?.value ?? "",
       disabled: !!get("disabled")?.checked,
+      ...(previous.icon ? { icon: previous.icon } : {}),
+      ...(previous.recommendation ? { recommendation: previous.recommendation } : {}),
     });
   });
 
@@ -914,6 +918,8 @@ function stripInternalFields(dataWithUids) {
       domain: s.domain || "",
       note: s.note ?? "",
       ...(s.disabled ? { disabled: true } : {}),
+      ...(s.icon ? { icon: s.icon } : {}),
+      ...(s.recommendation ? { recommendation: s.recommendation } : {}),
     })),
     notice: {
       noticeId: dataWithUids.notice?.noticeId || "",
